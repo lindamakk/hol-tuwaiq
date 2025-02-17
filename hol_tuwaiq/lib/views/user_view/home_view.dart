@@ -7,6 +7,7 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+
     return Scaffold(
       backgroundColor: Color(0xffFEFEFE),
       appBar: AppBar(backgroundColor: Color(0xffFEFEFE)),
