@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hol_tuwaiq/services/supabase.dart';
+import 'package:hol_tuwaiq/services/supabase/supabase.dart';
 import 'package:hol_tuwaiq/views/admin_view/home_screen/home_screen.dart';
 import 'package:hol_tuwaiq/views/user_view/home_view.dart';
 
@@ -14,6 +14,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(home: HomeView());
+    return const MaterialApp(home: HomeScreenAdmin());
   }
 }
