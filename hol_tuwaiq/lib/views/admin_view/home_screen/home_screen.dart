@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hol_tuwaiq/model/question_model.dart';
 import 'package:hol_tuwaiq/views/admin_view/home_screen/cubit/home_admin_cubit.dart';
 
 final colosss = Color(0xff4931AF);
@@ -54,136 +55,162 @@ class HomeScreenAdmin extends StatelessWidget {
                       color: colosss.withAlpha(10),
                       borderRadius: BorderRadius.circular(25),
                     ),
-                    child: Table(
-                      border: TableBorder.all(),
+                    child: Column(
+                      children: [
+                        BlocBuilder<HomeAdminCubit, HomeAdminState>(
+                          builder: (context, state) {
+                            if (state is LoadingState) {
+                              return Center(child: CircularProgressIndicator());
+                            }
+                            if (state is ErrorState) {
+                              return Text("data");
+                            }
+                            return Table(
+                              border: TableBorder.all(),
 
-                      columnWidths: const <int, TableColumnWidth>{
-                        0: IntrinsicColumnWidth(flex: 0.2),
-                        1: IntrinsicColumnWidth(flex: 0.8),
-                        2: IntrinsicColumnWidth(flex: 0.8),
-                        3: IntrinsicColumnWidth(flex: 0.8),
-                        4: IntrinsicColumnWidth(flex: 0.2),
-                      },
-                      defaultVerticalAlignment:
-                          TableCellVerticalAlignment.middle,
-                      children: <TableRow>[
-                        TableRow(
-                          children: <Widget>[
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.top,
-                              child: Container(
-                                height: 32,
-                                width: 32,
-                                color: colosss,
-                                alignment: Alignment.center,
+                              columnWidths: const <int, TableColumnWidth>{
+                                0: IntrinsicColumnWidth(flex: 0.2),
+                                1: IntrinsicColumnWidth(flex: 0.8),
+                                2: IntrinsicColumnWidth(flex: 0.8),
+                                3: IntrinsicColumnWidth(flex: 0.8),
+                                4: IntrinsicColumnWidth(flex: 0.2),
+                              },
+                              defaultVerticalAlignment:
+                                  TableCellVerticalAlignment.middle,
+                              children: <TableRow>[
+                                TableRow(
+                                  children: <Widget>[
+                                    TableCell(
+                                      verticalAlignment:
+                                          TableCellVerticalAlignment.top,
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        color: colosss,
+                                        alignment: Alignment.center,
 
-                                child: Text(
-                                  "ID",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
+                                        child: Text(
+                                          "ID",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      verticalAlignment:
+                                          TableCellVerticalAlignment.top,
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        color: colosss,
+                                        alignment: Alignment.center,
+
+                                        child: Text(
+                                          "Name",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      verticalAlignment:
+                                          TableCellVerticalAlignment.top,
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        color: Color(0xff4931AF),
+                                        alignment: Alignment.center,
+
+                                        child: Text(
+                                          "Topic",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      verticalAlignment:
+                                          TableCellVerticalAlignment.top,
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        color: Color(0xff4931AF),
+                                        alignment: Alignment.center,
+
+                                        child: Text(
+                                          "Question",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    TableCell(
+                                      verticalAlignment:
+                                          TableCellVerticalAlignment.top,
+                                      child: Container(
+                                        height: 32,
+                                        width: 32,
+                                        color: Color(0xff4931AF),
+                                        alignment: Alignment.center,
+                                        child: Text(
+                                          "Date",
+                                          style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                ...List.generate(
+                                  bloc.dataQ.length,
+                                  (index) => rowTableCustom(
+                                    id: index + 1,
+                                    dataRow: bloc.dataQ[index],
                                   ),
                                 ),
-                              ),
-                            ),
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.top,
-                              child: Container(
-                                height: 32,
-                                width: 32,
-                                color: colosss,
-                                alignment: Alignment.center,
-
-                                child: Text(
-                                  "Name",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.top,
-                              child: Container(
-                                height: 32,
-                                width: 32,
-                                color: Color(0xff4931AF),
-                                alignment: Alignment.center,
-
-                                child: Text(
-                                  "Topic",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.top,
-                              child: Container(
-                                height: 32,
-                                width: 32,
-                                color: Color(0xff4931AF),
-                                alignment: Alignment.center,
-
-                                child: Text(
-                                  "Question",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            TableCell(
-                              verticalAlignment: TableCellVerticalAlignment.top,
-                              child: Container(
-                                height: 32,
-                                width: 32,
-                                color: Color(0xff4931AF),
-                                alignment: Alignment.center,
-                                child: Text(
-                                  "Date",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
+                                // TableRow(
+                                //   decoration: const BoxDecoration(color: colosss.withAlpha(10)),
+                                //   children: <Widget>[
+                                //     Container(height: 64, width: 128, color: Colors.purple),
+                                //     Container(height: 32, color: Colors.yellow),
+                                //     Center(
+                                //       child: Container(height: 32, width: 32, color: Colors.orange),
+                                //     ),
+                                //   ],
+                                // ),
+                              ],
+                            );
+                          },
                         ),
-
-                        // TableRow(
-                        //   decoration: const BoxDecoration(color: colosss.withAlpha(10)),
-                        //   children: <Widget>[
-                        //     Container(height: 64, width: 128, color: Colors.purple),
-                        //     Container(height: 32, color: Colors.yellow),
-                        //     Center(
-                        //       child: Container(height: 32, width: 32, color: Colors.orange),
-                        //     ),
-                        //   ],
-                        // ),
+                        SizedBox(height: 6),
+                        TextButton(
+                          onPressed: () {},
+                          child: Container(
+                            width: 200,
+                            height: 45,
+                            alignment: Alignment.center,
+                            child: Text("Export to Excel"),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              border: Border.all(color: colosss),
+                              borderRadius: BorderRadius.circular(8),
+                              boxShadow: [
+                                BoxShadow(offset: Offset(4, 4), color: colosss),
+                              ],
+                            ),
+                          ),
+                        ),
                       ],
-                    ),
-                  ),
-                  TextButton(
-                    onPressed: () {},
-                    child: Container(
-                      width: 200,
-                      height: 45,
-                      alignment: Alignment.center,
-                      child: Text("Export to Excel"),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(color: colosss),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(offset: Offset(4, 4), color: colosss),
-                        ],
-                      ),
                     ),
                   ),
                 ],
@@ -200,7 +227,7 @@ class Data {
   Data();
 }
 
-rowTableCustom({required int id}) {
+rowTableCustom({required QuestionModel dataRow, required int? id}) {
   return TableRow(
     children: <Widget>[
       TableCell(
@@ -212,7 +239,7 @@ rowTableCustom({required int id}) {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Fahad Turki Mohammed Alazmi"),
+            child: Text(dataRow.nameStudent),
           ),
         ),
       ),
@@ -221,7 +248,7 @@ rowTableCustom({required int id}) {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("Mobile developer"),
+            child: Text(dataRow.topics.nameEn),
           ),
         ),
       ),
@@ -230,10 +257,7 @@ rowTableCustom({required int id}) {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text(
-              "Flutter vs React native and how developer some of reole Flutter vs React native and how developer some of reole Flutter vs React native and how developer some of reole",
-              textAlign: TextAlign.center,
-            ),
+            child: Text(dataRow.question, textAlign: TextAlign.center),
           ),
         ),
       ),
@@ -242,7 +266,7 @@ rowTableCustom({required int id}) {
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Text("10/10/2024"),
+            child: Text(dataRow.dateAdd),
           ),
         ),
       ),
