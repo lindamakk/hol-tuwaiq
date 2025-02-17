@@ -7,6 +7,22 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final formKey = GlobalKey<FormState>();
+    List<String> options = [
+      'News',
+      'Entertainment',
+      'Politics',
+      'Automotive',
+      'Sports',
+      'Education',
+      'Fashion',
+      'Travel',
+      'Food',
+      'Tech',
+      'Science',
+    ];
+
+    TextEditingController controllerName = TextEditingController();
+    TextEditingController controllerTopic = TextEditingController();
     return Scaffold(
       backgroundColor: Color(0xffFEFEFE),
       appBar: AppBar(backgroundColor: Color(0xffFEFEFE)),
@@ -50,30 +66,31 @@ class HomeView extends StatelessWidget {
                         textAlign: TextAlign.right,
                         style: TextStyle(fontSize: 20),
                       ),
-                      ChoicesWidget(),
+                      Align(
+                        alignment: Alignment.center,
+                        child: ChoicesWidget(options: options),
+                      ),
                       SizedBox(height: 20),
                       Text(
                         ':الإسم',
                         textAlign: TextAlign.right,
                         style: TextStyle(fontSize: 20),
                       ),
-
-                      TextFeildWidget(),
-
+                      TextFeildWidget(controller: controllerName),
                       SizedBox(height: 20),
                       Text(
                         ':الموضوع',
                         textAlign: TextAlign.right,
                         style: TextStyle(fontSize: 20),
                       ),
-                      TextFeildWidget(maxLines: 3),
+                      TextFeildWidget(maxLines: 3, controller: controllerTopic),
                       SizedBox(height: 30),
                       Align(
                         alignment: Alignment.center,
                         child: ButtonWidget(
                           onPressed: () {
                             if (formKey.currentState?.validate() == true) {
-                              print('object');
+                              //send topic
                             }
                           },
                         ),
@@ -133,6 +150,12 @@ class TextFeildWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(10),
         ),
         child: TextFormField(
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please Enter Somthing';
+            }
+            return null;
+          },
           controller: controller,
           textAlign: TextAlign.end,
           maxLines: maxLines ?? 1,
@@ -147,7 +170,8 @@ class TextFeildWidget extends StatelessWidget {
 }
 
 class ChoicesWidget extends StatefulWidget {
-  const ChoicesWidget({super.key});
+  final List<String> options;
+  const ChoicesWidget({super.key, required this.options});
 
   @override
   State<ChoicesWidget> createState() => _ChoicesWidgetState();
@@ -157,25 +181,12 @@ class _ChoicesWidgetState extends State<ChoicesWidget> {
   int tag = 0;
   @override
   Widget build(BuildContext context) {
-    List<String> options = [
-      'News',
-      'Entertainment',
-      'Politics',
-      'Automotive',
-      'Sports',
-      'Education',
-      'Fashion',
-      'Travel',
-      'Food',
-      'Tech',
-      'Science',
-    ];
     return ChipsChoice<int>.single(
       value: tag,
       onChanged: (val) => setState(() => tag = val),
 
       choiceItems: C2Choice.listFrom<int, String>(
-        source: options,
+        source: widget.options,
         value: (i, v) => i,
         label: (i, v) => v,
       ),
