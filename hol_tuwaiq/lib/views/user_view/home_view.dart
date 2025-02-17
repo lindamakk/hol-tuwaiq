@@ -11,79 +11,105 @@ class HomeView extends StatelessWidget {
       backgroundColor: Color(0xffFEFEFE),
       appBar: AppBar(backgroundColor: Color(0xffFEFEFE)),
       body: SingleChildScrollView(
-        child: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Container(
-              width: 600,
-              decoration: BoxDecoration(
-                color: Color(0xffF7F9FF),
-                border: Border.all(width: 3, color: Color(0xffC0C9E1)),
-                borderRadius: BorderRadius.circular(30),
+        child: Column(
+          children: [
+            Center(
+              child: SizedBox(
+                width: 140,
+                height: 100,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Image.asset('logo/T.png', height: 60, width: 60),
+                    Spacer(),
+                    Text(
+                      "X",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    Spacer(),
+                    Image.asset('logo/h.png', height: 60, width: 60),
+                  ],
+                ),
               ),
-              child: Form(
-                key: formKey,
-                child: Padding(
-                  padding: const EdgeInsets.all(30),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text(
-                        '!أرسل سؤالك',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontSize: 32,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Text(
-                        'أرسل استفسارك بخصوص أي من الموضوعات التالية ليتم مناقشتها في ورش العمل المستقبلية',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(fontSize: 16),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        ':المجال',
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Container(
+                  width: 600,
+                  decoration: BoxDecoration(
+                    color: Color(0xffF7F9FF),
+                    border: Border.all(width: 3, color: Color(0xffC0C9E1)),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: Form(
+                    key: formKey,
+                    child: Padding(
+                      padding: const EdgeInsets.all(30),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '!أرسل سؤالك',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(
+                            'أرسل استفسارك بخصوص أي من الموضوعات التالية ليتم مناقشتها في ورش العمل المستقبلية',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          SizedBox(height: 20),
+                          Text(
+                            ':المجال',
 
-                        textAlign: TextAlign.right,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      ChoicesWidget(),
-                      SizedBox(height: 20),
-                      Text(
-                        ':الإسم',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(fontSize: 20),
-                      ),
+                            textAlign: TextAlign.right,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          ChoicesWidget(),
+                          SizedBox(height: 20),
+                          Text(
+                            ':الإسم',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(fontSize: 20),
+                          ),
 
-                      TextFeildWidget(),
+                          TextFeildWidget(),
 
-                      SizedBox(height: 20),
-                      Text(
-                        ':الموضوع',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(fontSize: 20),
+                          SizedBox(height: 20),
+                          Text(
+                            ':الموضوع',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(fontSize: 20),
+                          ),
+                          TextFeildWidget(maxLines: 3),
+                          SizedBox(height: 30),
+                          Align(
+                            alignment: Alignment.center,
+                            child: ButtonWidget(
+                              onPressed: () {
+                                if (formKey.currentState?.validate() == true) {
+                                  print('object');
+                                }
+                              },
+                            ),
+                          ),
+                        ],
                       ),
-                      TextFeildWidget(maxLines: 3),
-                      SizedBox(height: 30),
-                      Align(
-                        alignment: Alignment.center,
-                        child: ButtonWidget(
-                          onPressed: () {
-                            if (formKey.currentState?.validate() == true) {
-                              print('object');
-                            }
-                          },
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
+          ],
         ),
       ),
     );
