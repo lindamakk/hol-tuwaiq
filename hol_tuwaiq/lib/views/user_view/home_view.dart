@@ -105,41 +105,7 @@ class HomeView extends StatelessWidget {
                           ),
                         ],
                       ),
-<<<<<<< HEAD
                     ),
-=======
-                      Align(
-                        alignment: Alignment.center,
-                        child: ChoicesWidget(options: options),
-                      ),
-                      SizedBox(height: 20),
-                      Text(
-                        ':الإسم',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      TextFeildWidget(controller: controllerName),
-                      SizedBox(height: 20),
-                      Text(
-                        ':الموضوع',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(fontSize: 20),
-                      ),
-                      TextFeildWidget(maxLines: 3, controller: controllerTopic),
-                      SizedBox(height: 30),
-
-                      Align(
-                        alignment: Alignment.center,
-                        child: ButtonWidget(
-                          onPressed: () {
-                            if (formKey.currentState?.validate() == true) {
-                              //send topic
-                            }
-                          },
-                        ),
-                      ),
-                    ],
->>>>>>> 67fad23 (,)
                   ),
                 ),
               ),
