@@ -85,6 +85,7 @@ class HomeView extends StatelessWidget {
                       ),
                       TextFeildWidget(maxLines: 3, controller: controllerTopic),
                       SizedBox(height: 30),
+
                       Align(
                         alignment: Alignment.center,
                         child: ButtonWidget(
