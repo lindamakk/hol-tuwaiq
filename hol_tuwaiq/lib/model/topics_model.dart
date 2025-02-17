@@ -11,10 +11,10 @@ class Topics {
   }
 
   Map<String, dynamic> toJson() {
-    final QuestionModel = <String, dynamic>{};
-    QuestionModel['id'] = id;
-    QuestionModel['name_ar'] = nameAr;
-    QuestionModel['name_en'] = nameEn;
-    return QuestionModel;
+    final questionModel = <String, dynamic>{};
+    questionModel['id'] = id;
+    questionModel['name_ar'] = nameAr;
+    questionModel['name_en'] = nameEn;
+    return questionModel;
   }
 }
