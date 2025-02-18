@@ -26,7 +26,7 @@ class HomeView extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: Color(0xffFEFEFE),
-      appBar: AppBar(backgroundColor: Color(0xffFEFEFE)),
+      // appBar: AppBar(backgroundColor: Color(0xffFEFEFE)),
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -99,7 +99,7 @@ class HomeView extends StatelessWidget {
                             style: TextStyle(fontSize: 20),
                           ),
 
-                          TextFeildWidget(),
+                          TextFeildWidget(controller: controllerName),
 
                           SizedBox(height: 20),
                           Text(
@@ -107,14 +107,20 @@ class HomeView extends StatelessWidget {
                             textAlign: TextAlign.right,
                             style: TextStyle(fontSize: 20),
                           ),
-                          TextFeildWidget(maxLines: 3),
+                          TextFeildWidget(
+                            maxLines: 3,
+                            controller: controllerTopic,
+                          ),
                           SizedBox(height: 30),
                           Align(
                             alignment: Alignment.center,
                             child: ButtonWidget(
+                              buttonText: 'إرسال',
                               onPressed: () {
                                 if (formKey.currentState?.validate() == true) {
+                                  //send form
                                   print('object');
+                                  print(controllerTopic.text);
                                 }
                               },
                             ),
@@ -135,26 +141,26 @@ class HomeView extends StatelessWidget {
 
 class ButtonWidget extends StatelessWidget {
   final Function()? onPressed;
-  const ButtonWidget({super.key, this.onPressed});
+  final String buttonText;
+  const ButtonWidget({super.key, this.onPressed, required this.buttonText});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Color(0xffFEFEFE),
-
-        border: Border.all(width: 2, color: Color(0xff4931AF)),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 30),
-        child: ElevatedButton(
-          onPressed: onPressed,
-          child: Text(
-            'إرسال',
-            style: TextStyle(color: Color(0xff4931AF), fontSize: 20),
-          ),
+    return TextButton(
+      onPressed: onPressed,
+      child: Container(
+        width: 200,
+        height: 45,
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          border: Border.all(color: Color(0xff4931AF)),
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: [
+            BoxShadow(offset: Offset(4, 4), color: Color(0xff4931AF)),
+          ],
         ),
+        child: Text(buttonText),
       ),
     );
   }
@@ -197,6 +203,7 @@ class TextFeildWidget extends StatelessWidget {
 
 class ChoicesWidget extends StatefulWidget {
   final List<String> options;
+
   const ChoicesWidget({super.key, required this.options});
 
   @override
