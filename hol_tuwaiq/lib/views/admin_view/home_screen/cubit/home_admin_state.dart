@@ -7,6 +7,6 @@ final class HomeAdminInitial extends HomeAdminState {}
 
 final class LoadingState extends HomeAdminState {}
 
-final class LoadDataState extends HomeAdminState {}
+final class LoadSuccessDataState extends HomeAdminState {}
 
 final class ErrorState extends HomeAdminState {}
