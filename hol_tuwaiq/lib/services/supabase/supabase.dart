@@ -1,4 +1,8 @@
+import 'dart:convert';
+
+import 'package:hol_tuwaiq/model/question_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+part './method/load_data.dart';
 
 class SupabaseIntegration {
   static final supabase = Supabase.instance.client;

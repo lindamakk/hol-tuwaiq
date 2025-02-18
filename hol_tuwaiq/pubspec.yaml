@@ -10,6 +10,7 @@ dependencies:
   chips_choice: ^3.0.1
   flutter:
     sdk: flutter
+  flutter_bloc: ^9.0.0
   supabase_flutter: ^2.8.3
 
 dev_dependencies:
